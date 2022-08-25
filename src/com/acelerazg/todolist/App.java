@@ -17,11 +17,22 @@ public class App {
 			mostrarMenu();
 			menu = sc.nextInt();
 
-			if (menu == 1) 
+			if (menu == 1) {
 				verListaDeTarefas(listaDeTarefas);
-			if(menu == 2) {
+			} else if(menu == 2) {
 				inserirNovaTarefa(listaDeTarefas);
+			} else if(menu == 3) {
+				
+			} else if(menu == 4) {
+				
+			} else if(menu == 5) {
+				
+			} else if(menu == 6) {
+				deletarTarefa(listaDeTarefas);
+			} else if(menu != 7){
+				System.out.println("\n#Comando incorreto.\n");
 			}
+			
 		}
 		
 		Empacotamento.gravarArquivo(listaDeTarefas, "dados.dat");
@@ -83,7 +94,29 @@ public class App {
 		}
 		listaDeTarefas.add(task);
 		Collections.sort(listaDeTarefas);
+	}
+	
+	public static void deletarTarefa(ArrayList<Tarefa> listaDeTarefas) {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Tarefas: \n");
+		verListaDeTarefas(listaDeTarefas);
+		System.out.println("\n\nDigite o ID da tarefa que deseja deletar:");
+		int id = sc.nextInt();
+		
+		if(id > listaDeTarefas.size()) {
+			System.out.println("ID inexistente.\n");
+		} else {
+			for(int i = 0; i < listaDeTarefas.size(); i++){
+		        Tarefa p = listaDeTarefas.get(i);
 
+		        if(p.getId() == id){
+		        	if(listaDeTarefas.remove(p)) {
+		        		System.out.println("Deletada!\n");
+		        		break;
+		        	}
+		        }
+		    }
+		}
 	}
 
 }
