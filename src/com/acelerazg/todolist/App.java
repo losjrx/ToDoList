@@ -1,13 +1,14 @@
 package com.acelerazg.todolist;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Scanner;
 
 public class App {
 
 	public static void main(String[] args) {
-		LinkedList<Tarefa> listaDeTarefas = Empacotamento.lerArquivo("dados.dat");
+		ArrayList<Tarefa> listaDeTarefas = Empacotamento.lerArquivo("dados.dat");
 		Scanner sc = new Scanner(System.in);
 		
 		int menu = -1;
@@ -34,7 +35,7 @@ public class App {
 				+ "\n4 - Listar tarefas por Status;\n5 - Alterar status da tarefa;\n6 - Deletar tarefa;\n7 - SAIR.");
 	}
 
-	public static void verListaDeTarefas(LinkedList<Tarefa> listaDeTarefas) {
+	public static void verListaDeTarefas(ArrayList<Tarefa> listaDeTarefas) {
 		if (listaDeTarefas.isEmpty()) {
 			System.out.println("\n\nSem tarefas! Comece o seu Backlog ToDo List inserindo nova tarefa!\n\n");
 		} else {
@@ -42,7 +43,7 @@ public class App {
 		}
 	}
 	
-	public static void inserirNovaTarefa(LinkedList<Tarefa> listaDeTarefas) {
+	public static void inserirNovaTarefa(ArrayList<Tarefa> listaDeTarefas) {
 		Tarefa task = null;
 		
 		String nome;
@@ -68,12 +69,8 @@ public class App {
 		System.out.println("Status: \n1 - To Do\n2 - Doing\n3 - Done");
 		status = sc.nextInt();
 		
-		int i = 0;
-		if(listaDeTarefas.isEmpty()) {
-			i = 1;
-		} else {
-			i = listaDeTarefas.getLast().getId() + 1;
-		}
+		int i = listaDeTarefas.size() +1;
+		
 		
 		if(status == 1) {
 			task = new Tarefa(i,nome,categoria,descricao,dataTermino,nivelPrioridade,"To Do");
@@ -85,6 +82,7 @@ public class App {
 			System.out.println("Dados incorretos. Tente criar tarefa novamente.");
 		}
 		listaDeTarefas.add(task);
+		Collections.sort(listaDeTarefas);
 
 	}
 
