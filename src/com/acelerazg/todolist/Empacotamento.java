@@ -12,7 +12,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Empacotamento {
-public static void gravarArquivo(List<Tarefa> lista, String arquivo) {
+public static void gravarArquivo(LinkedList<Tarefa> lista, String arquivo) {
 		
 		File arq = new File(arquivo);
 		
@@ -29,8 +29,8 @@ public static void gravarArquivo(List<Tarefa> lista, String arquivo) {
 		}
 	}
 	
-	public static List<Tarefa> lerArquivo(String arquivo){
-		List<Tarefa> lista = new LinkedList<Tarefa>();
+	public static LinkedList<Tarefa> lerArquivo(String arquivo){
+		LinkedList<Tarefa> lista = new LinkedList<Tarefa>();
 		
 		File arq = new File(arquivo);
 		if(arq.exists()) {
