@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 public class Empacotamento {
 public static void gravarArquivo(ArrayList<Tarefa> lista, String arquivo) {

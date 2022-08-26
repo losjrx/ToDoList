@@ -2,7 +2,6 @@ package com.acelerazg.todolist;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.LinkedList;
 import java.util.Scanner;
 
 public class App {
@@ -26,7 +25,7 @@ public class App {
 			} else if(menu == 4) {
 				
 			} else if(menu == 5) {
-				
+				alterarStatusTarefa(listaDeTarefas);
 			} else if(menu == 6) {
 				deletarTarefa(listaDeTarefas);
 			} else if(menu != 7){
@@ -80,15 +79,13 @@ public class App {
 		System.out.println("Status: \n1 - To Do\n2 - Doing\n3 - Done");
 		status = sc.nextInt();
 		
-		int i = listaDeTarefas.size() +1;
-		
 		
 		if(status == 1) {
-			task = new Tarefa(i,nome,categoria,descricao,dataTermino,nivelPrioridade,"To Do");
+			task = new Tarefa(nome,categoria,descricao,dataTermino,nivelPrioridade,"To Do");
 		} else if(status == 2) {
-			task = new Tarefa(i,nome,categoria,descricao,dataTermino,nivelPrioridade,"Doing");
+			task = new Tarefa(nome,categoria,descricao,dataTermino,nivelPrioridade,"Doing");
 		} else if(status == 3) {
-			task = new Tarefa(i,nome,categoria,descricao,dataTermino,nivelPrioridade,"Done");
+			task = new Tarefa(nome,categoria,descricao,dataTermino,nivelPrioridade,"Done");
 		} else {
 			System.out.println("Dados incorretos. Tente criar tarefa novamente.");
 		}
@@ -96,27 +93,57 @@ public class App {
 		Collections.sort(listaDeTarefas);
 	}
 	
+	public static void alterarStatusTarefa(ArrayList<Tarefa> listaDeTarefas) {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Tarefas: \n");
+		verListaDeTarefas(listaDeTarefas);
+		System.out.println("\n\nDigite o nome da tarefa que deseja alterar o status:");
+		String nome = sc.nextLine();
+		
+		for(int i = 0; i < listaDeTarefas.size(); i++){
+	        Tarefa p = listaDeTarefas.get(i);
+
+	        if(p.getNome().equalsIgnoreCase(nome)){
+	        	System.out.println("Novo status: \n1 - To Do\n2 - Doing\n3 - Done");
+	    		int status = sc.nextInt();
+	    		
+	    		if(status == 1) {
+	    			p.setStatus("To Do");
+	    			return;
+	    		}
+	    			
+	    		if(status == 2) {
+	    			p.setStatus("Doing");
+	    			return;
+	    		}
+	    			
+	    		if(status == 3) {
+	    			p.setStatus("Done");
+	    			return;
+	    		}
+	    		System.out.println("\nStatus incorreto.\n");	
+	        }
+	        System.out.println("\nNome incorreto\n");
+	    }
+	}
 	public static void deletarTarefa(ArrayList<Tarefa> listaDeTarefas) {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Tarefas: \n");
 		verListaDeTarefas(listaDeTarefas);
-		System.out.println("\n\nDigite o ID da tarefa que deseja deletar:");
-		int id = sc.nextInt();
-		
-		if(id > listaDeTarefas.size()) {
-			System.out.println("ID inexistente.\n");
-		} else {
-			for(int i = 0; i < listaDeTarefas.size(); i++){
-		        Tarefa p = listaDeTarefas.get(i);
+		System.out.println("\n\nDigite o nome da tarefa que deseja deletar:");
+		String nome = sc.nextLine();
 
-		        if(p.getId() == id){
-		        	if(listaDeTarefas.remove(p)) {
-		        		System.out.println("Deletada!\n");
-		        		break;
-		        	}
-		        }
-		    }
-		}
+		for(int i = 0; i < listaDeTarefas.size(); i++){
+	        Tarefa p = listaDeTarefas.get(i);
+
+	        if(p.getNome().equalsIgnoreCase(nome)){
+	        	if(listaDeTarefas.remove(p)) {
+	        		System.out.println("Deletada!\n");
+	        		return;
+	        	}
+	        }
+	    }
+		System.out.println("\nNome incorreto\n");
 	}
 
 }

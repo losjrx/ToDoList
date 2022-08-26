@@ -5,7 +5,6 @@ import java.io.Serializable;
 public class Tarefa implements Serializable,Comparable<Tarefa>{
 	
 	private static final long serialVersionUID = 782148435435790745L;
-	private int id;
 	private String nome;
 	private String categoria;
 	private String descricao;
@@ -13,8 +12,7 @@ public class Tarefa implements Serializable,Comparable<Tarefa>{
 	private int nivelPrioridade;
 	private String status;
 
-    public Tarefa(int id, String nome, String categoria, String descricao, String dataTermino, int nivelPrioridade, String status) {
-        this.id = id;
+    public Tarefa(String nome, String categoria, String descricao, String dataTermino, int nivelPrioridade, String status) {
     	this.nome = nome;
         this.categoria = categoria;
         this.descricao = descricao;
@@ -22,14 +20,6 @@ public class Tarefa implements Serializable,Comparable<Tarefa>{
         this.nivelPrioridade = nivelPrioridade;
         this.status = status;
     }
-
-    public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
 
 	public String getNome() {
         return nome;
@@ -81,7 +71,7 @@ public class Tarefa implements Serializable,Comparable<Tarefa>{
 
 	@Override
 	public String toString() {
-		return "\n> Tarefa [id=" + id + ", nome=" + nome + ", categoria=" + categoria + ", descricao=" + descricao
+		return "\n> Tarefa [nome=" + nome + ", categoria=" + categoria + ", descricao=" + descricao
 				+ ", dataTermino=" + dataTermino + ", nivelPrioridade=" + nivelPrioridade + ", status=" + status + "]" + "\n";
 	}
 
