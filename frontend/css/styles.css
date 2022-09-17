@@ -1,0 +1,67 @@
+body {
+	background-color: #6959CD;
+}
+
+.inserir_tarefa{
+	border: 3px solid darkblue;
+	border-radius: 10px;
+	background: lightblue;
+	width: 500px;
+	font-family: Arial, Helvetica, sans-serif;
+	color: black;
+	padding: 15px;
+	display: none;
+}
+
+form {
+	border-radius: 5px;
+}
+
+input {
+	border-radius: 5px;
+}
+
+button{
+	cursor: pointer;
+	border-radius: 90px;
+	background-color: #bb00dd;
+	justify-content: center;
+   align-items: center;
+}
+
+
+button > img {
+	border-radius: 95px;
+}
+
+
+.tabelas{
+	display: inline-block;
+}
+
+.tabelaTODO{
+	border: 1px solid #000;
+	border-radius: 5px;
+	margin: 5px;
+	padding: 5px;
+	background-color: orangered;
+	display: none;
+}
+
+.tabelaDOING{
+	border: 1px solid #000;
+	border-radius: 5px;
+	margin: 5px;
+	padding: 5px;
+	background-color: yellow;
+	display: none;
+}
+
+.tabelaDONE{
+	border: 1px solid #000;
+	border-radius: 5px;
+	margin: 5px;
+	padding: 5px;
+	background-color: lightseagreen;
+	display: none;
+}

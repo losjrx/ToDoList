@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+	<head>
+		<link rel="stylesheet" type="text/css" href="css/styles.css">
+		<title>TODO List</title>
+	</head>
+
+	<body>
+
+		
+			<header>
+
+				<div class="logo-area">
+					<button id="logotipo"><img src="imagens/logo.jpg" id="logo" height="500" width="500" alt="logo TODO List"></button>
+				</div>
+
+
+				<div class="apresentacao">
+					<h1>Faça sua TODO List!</h1>
+				</div>
+
+			</header>
+
+		<div class="inserir_tarefa">
+
+			<h2>Inserir tarefa:</h2>
+			
+			<div class="nomeando_tarefa">
+				<h4>Nome da tarefa:</h4> 
+				<input id="nome_tarefa" type="text" placeholder="Nova tarefa...">
+			</div>
+			
+			<div class="categorizando_tarefa">
+				<p><h4>Agora você pode criar uma categoria para esta tarefa (como uma tag).</h3></p>
+				Categoria: <input id="categoria_tarefa" type="text" placeholder="Crie uma categoria...">
+			</div>
+
+			<div class="descrevendo_tarefa">
+				<p><h4>Descreva brevemente a tarefa.</h4></p>
+				Descrição: <input id="descrição_tarefa" type="text" placeholder="Descrição...">
+			</div>
+			
+			<div class="ajustando_deadline">
+				<p><h4>Data limite da tarefa.</h4></p>
+				<input type="date" id="data_deadline">
+			</div>
+
+			<p><strong>Prioridade da tarefa de 1 (menos importante) a 5 (mais importante):</strong></p>
+
+			<div class="ajustando_prioridade">
+				<form>
+
+                    <select id="prioridades">
+                        <option value="opt1">1</option>
+                        <option value="opt2">2</option>
+                        <option value="opt3">3</option>
+                        <option value="opt3">4</option>
+                        <option value="opt3">5</option>
+                    </select>
+
+           		 </form>
+			</div>
+
+			<p><strong>Status da tarefa:</strong></p>
+
+			<div class="ajustando_status">
+				
+				<form>
+
+                <input type="radio" name="status" value="To Do" checked> To Do<br>
+                <input type="radio" name="status" value="Doing"> Doing<br>
+                <input type="radio" name="status" value="Done"> Done
+                
+            	</form>
+				
+			</div>
+			<br>
+
+			<button id="criar_tarefa"><strong>Criar tarefa!</strong></button>
+
+		</div>
+
+		<br>
+			<div class="tabelas">
+				<div class="tabelaTODO">
+	                <table>
+	                    <thead>
+	                    	<tr>
+	                    		<th>Tarefa</th>
+	                    		<th>Categoria</th>
+	                    		<th>Descrição</th>
+	                    		<th>Prioridade da tarefa</th>
+	                    		<th>Data Limite</th>
+	                    	</tr>
+	                    </thead>
+	                    
+	                    <tbody id="dados-TODO">
+	                    	
+	                    </tbody>
+
+	                </table>
+	            </div>
+
+	            <div class="tabelaDOING">
+	                <table>
+	                    <thead>
+	                    	<tr>
+	                    		<th>Tarefa</th>
+	                    		<th>Categoria</th>
+	                    		<th>Descrição</th>
+	                    		<th>Prioridade da tarefa</th>
+	                    		<th>Data Limite</th>
+	                    	</tr>
+	                    </thead>
+	                    
+	                    <tbody id="dados-DOING">
+	                    	
+	                    </tbody>
+
+	                </table>
+	            </div>
+
+	            <div class="tabelaDONE">
+	                <table>
+	                    <thead>
+	                    	<tr>
+	                    		<th>Tarefa</th>
+	                    		<th>Categoria</th>
+	                    		<th>Descrição</th>
+	                    		<th>Prioridade da tarefa</th>
+	                    		<th>Data Limite</th>
+	                    		<th>Término</th>
+	                    	</tr>
+	                    </thead>
+	                    
+	                    <tbody id="dados-DONE">
+	                    	
+	                    </tbody>
+
+	                </table>
+	            </div>
+			</div>
+		
+
+		<script src="tools/scripts.js"></script>
+	</body>
+
+</html>
