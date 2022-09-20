@@ -13,8 +13,12 @@ body {
 	display: none;
 }
 
-form {
-	border-radius: 5px;
+.formularioEdicao select{
+	position: relative;
+	background-color: white;
+	border-radius: 10px;
+	font-weight: bold;
+	border: 2px solid darkblue;
 }
 
 input {
@@ -25,8 +29,7 @@ button{
 	cursor: pointer;
 	border-radius: 90px;
 	background-color: #bb00dd;
-	justify-content: center;
-   align-items: center;
+	font-weight: bold;
 }
 
 
