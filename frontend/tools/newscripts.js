@@ -1,3 +1,4 @@
+//Logotipo na pagina inicial, após click, reduz tamanho e mostra as opções de inserir tarefas;
 document.getElementById("logotipo").onclick = function () {
 	document.querySelector(".inserir_tarefa").style.display = "block";
 	document.getElementById("logo").height = "100";
@@ -6,8 +7,12 @@ document.getElementById("logotipo").onclick = function () {
 };
 
 
-var num_botao = 0;
-var tarefas = [];
+var num_botao = 0;	//controle do id de cada tarefa
+var tarefas = [];	//array que guarda as tarefas (objetos)
+
+//percorre a array "tarefas"; insere o código HTML na div "dados-TODO" preenchendo a tabela, 
+//variavel x pega a classe dos botoes de excluir tarefa da tabela TODO
+//depois é atribuído o evento de exclusão para cada id de cada botão
 
 function atualizaTabelaTodo(){
 	var tabelaTODO = '';
@@ -23,6 +28,11 @@ function atualizaTabelaTodo(){
 	}
 };
 
+//funcao que atribui o evento de exclusão a casa botao da tabela TODO
+//Como o  número de tarefas é sempre o mesmo numero de botoes, essa funcao
+//usa o id do botao e seu indice dentro da array, assim é possível criar uma nova
+//array de objetos tarefa que não tenha a tarefa com esse indice
+
 function atribuirEventoExclusao(id,indiceTarefa){
 
 	document.getElementById(id).addEventListener("click", function(){
@@ -34,6 +44,8 @@ function atribuirEventoExclusao(id,indiceTarefa){
     });
 
 }
+
+//guarda o código HTML no parâmetro "linhaDaTabela" de uma nova tarefa criada
 
 function insereTarefaTODO(novaTarefa){
 
@@ -53,6 +65,11 @@ function insereTarefaTODO(novaTarefa){
 	
 
 };
+
+//Pega os valores dos dados de input inseridos pelo usuário e insere no novo objeto "novaTarefa";
+//A data esta saindo sempre com o dia anterior, isso foi corrigido na função setDate();
+//Após inserir, soma 1 na variável que controla o id das tarefas e, caso seja a primeira tarefa,
+//torna visível a tabela TODO.
 
 document.getElementById("criar_tarefa").onclick = function(){
 	var tarefa = document.getElementById("nome_tarefa").value;
@@ -82,6 +99,9 @@ document.getElementById("criar_tarefa").onclick = function(){
 	document.querySelector('.tabelaTODO').style.display = "flex";
 
 };
+
+//insere o texto HTML de formulario de alteração do status da tarefa,
+//Utilizado na funcao insereTarefaTODO();
 
 function insereFormularioMudarStatus(id){
 	var formulario = "";
