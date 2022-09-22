@@ -6,6 +6,9 @@ document.getElementById("logotipo").onclick = function () {
 	document.querySelector(".tabelas").style.display = "flex";
 };
 
+/*#########################################################
+ ################### TABELA 1 - TODO ######################
+##########################################################*/
 
 var num_botao = 0;	//controle do id de cada tarefa
 var tarefas = [];	//array que guarda as tarefas (objetos)
@@ -15,6 +18,11 @@ var tarefas = [];	//array que guarda as tarefas (objetos)
 //depois é atribuído o evento de exclusão para cada id de cada botão
 
 function atualizaTabelaTodo(){
+
+	if(tarefas.length == 0){
+    	document.querySelector('.tabelaTODO').style.display = "none";
+    }
+
 	var tabelaTODO = '';
 	for(var i = 0; i < tarefas.length; i++){
 		tabelaTODO += tarefas[i].linhaDaTabela;
@@ -26,12 +34,41 @@ function atualizaTabelaTodo(){
 	for(var a = 0; a < x.length; a++){
 		atribuirEventoExclusao(x[a].id,a);
 	}
+
+	adicionaEventoOnchangeNoStatusTODO();
+
 };
+
+//Percorre as Select Box na tabela TODO, pegando seu ID e o jogando na função addEventSelectBoxTODO;
+function adicionaEventoOnchangeNoStatusTODO(){
+	for(var b = 0; b < tarefas.length; b++){
+
+		var idSelect = ".formularioEdicaoTODO select#form" + tarefas[b].id.toString();
+		var p = document.querySelectorAll(idSelect);
+
+		addEventSelectBoxTODO(p['0'].id,b);
+
+	}
+}
+
+
+function addEventSelectBoxTODO(id,task){
+
+	document.getElementById(id).addEventListener("change", function () {
+			var opcao = document.getElementById(id).options[document.getElementById(id).options.selectedIndex].innerHTML;
+			
+			if(opcao == "Doing"){
+				insereTarefaDoing(task);
+			}
+
+		});
+}
 
 //funcao que atribui o evento de exclusão a casa botao da tabela TODO
 //Como o  número de tarefas é sempre o mesmo numero de botoes, essa funcao
 //usa o id do botao e seu indice dentro da array, assim é possível criar uma nova
-//array de objetos tarefa que não tenha a tarefa com esse indice
+//array de objetos tarefa que não tenha a tarefa com esse indice.
+//Tira visibilidade da tabela TODO caso não tenha tarefas
 
 function atribuirEventoExclusao(id,indiceTarefa){
 
@@ -44,6 +81,7 @@ function atribuirEventoExclusao(id,indiceTarefa){
     });
 
 }
+
 
 //guarda o código HTML no parâmetro "linhaDaTabela" de uma nova tarefa criada
 
@@ -89,6 +127,7 @@ document.getElementById("criar_tarefa").onclick = function(){
 		"descricao": descricao,
 		"dataLimite": dataLimite,
 		"prioridade": prioridade,
+		"dataInicio": "",
 		"dataTermino": "",
 		"id": num_botao,
 		"linhaDaTabela": "",
@@ -105,9 +144,9 @@ document.getElementById("criar_tarefa").onclick = function(){
 
 function insereFormularioMudarStatus(id){
 	var formulario = "";
-	formulario += '<div class="formularioEdicao">';
+	formulario += '<div class="formularioEdicaoTODO">';
 	formulario += "<form>";
-	formulario += '<select id="' + id.toString() + '" >';
+	formulario += '<select id="' + "form" + id.toString() + '" >';
 	formulario += '<option value="opt1">To Do</option>';
 	formulario += '<option value="opt2">Doing</option>';
 	formulario += '<option value="opt3">Done</option>';
@@ -116,4 +155,127 @@ function insereFormularioMudarStatus(id){
 	formulario += "</div>";
 
 	return formulario;
+};
+
+/*####################################################################################################################
+ ################################################### TABELA 2 - DOING ###############################################
+#####################################################################################################################*/
+
+var tarefasDoing = [];
+var idTarefasDoing = 0;
+
+function atribuirEventoExclusaoDOING(id,indiceTarefa){
+
+	document.getElementById(id).addEventListener("click", function(){
+
+    	let updatedTarefasDoing = tarefasDoing.filter(task => task.id != tarefasDoing[indiceTarefa].id);
+    	tarefasDoing = updatedTarefasDoing;
+    	atualizaTabelaDoing();
+
+    	if(tarefasDoing.length == 0){
+    		document.querySelector('.tabelaDOING').style.display = "none";
+    	}
+
+    });
+
+}
+
+function atualizaTabelaDoing(){
+
+	var tabelaDOING = '';
+
+	for(var i = 0; i < tarefasDoing.length; i++){
+		tabelaDOING += tarefasDoing[i].linhaDaTabela;
+	}
+	
+	document.getElementById("dados-DOING").innerHTML = tabelaDOING;
+
+	var x = document.getElementsByClassName('btnExcluirDOING');
+
+	for(var a = 0; a < x.length; a++){
+		atribuirEventoExclusaoDOING(x[a].id,a);
+	}
+
+	document.querySelector('.tabelaDOING').style.display = "flex";
+
+	adicionaEventoOnchangeNoStatusDOING();
+}
+
+function adicionaEventoOnchangeNoStatusDOING(){
+	for(var b = 0; b < tarefasDoing.length; b++){
+
+		var idSelect = ".formularioEdicaoDOING select#form" + tarefasDoing[b].id.toString();
+		var p = document.querySelectorAll(idSelect);
+
+		console.log(p);
+
+		addEventSelectBoxDOING(p['0'].id);
+
+	}
+}
+
+
+function addEventSelectBoxDOING(id){
+
+
+	document.getElementById(id).addEventListener("change", function () {
+			var opcao = document.getElementById(id).options[document.getElementById(id).options.selectedIndex].innerHTML;
+			
+			if(opcao == "Done"){
+    			console.log("Feito");
+			} else {
+				console.log(id);
+			}
+
+			atualizaTabelaDoing();
+
+		});
+}
+
+
+function insereFormularioMudarStatusDOING(id){
+	var formulario = "";
+	formulario += '<div class="formularioEdicaoDOING">';
+	formulario += "<form>";
+	formulario += '<select id="' + "form" + id.toString() + '" >';
+	formulario += '<option value="opt1">Doing</option>';
+	formulario += '<option value="opt2">Done</option>';
+	formulario += "</select>";
+	formulario += "</form>";
+	formulario += "</div>";
+
+	return formulario;
+};
+
+
+
+function insereTarefaDoing(doingTarefa){
+
+	let updatedTarefas = tarefas.filter(task => task.id != tarefas[doingTarefa].id);
+
+	tarefas[doingTarefa].id = idTarefasDoing;
+	tarefas[doingTarefa].dataInicio = new Date();
+	
+	tarefas[doingTarefa].linhaDaTabela = "";
+
+	tarefas[doingTarefa].linhaDaTabela += "<tr>";
+	tarefas[doingTarefa].linhaDaTabela += "<td>" + tarefas[doingTarefa].tarefa + "</td>";
+	tarefas[doingTarefa].linhaDaTabela += "<td>" + tarefas[doingTarefa].dataInicio.toLocaleDateString() + "</td>";
+	tarefas[doingTarefa].linhaDaTabela += "<td>" + tarefas[doingTarefa].categoria + "</td>";
+	tarefas[doingTarefa].linhaDaTabela += "<td>" + tarefas[doingTarefa].descricao + "</td>";
+	tarefas[doingTarefa].linhaDaTabela += "<td>" + tarefas[doingTarefa].prioridade + "</td>";
+	tarefas[doingTarefa].linhaDaTabela += "<td>" + tarefas[doingTarefa].dataLimite.toLocaleDateString() + "</td>";
+	tarefas[doingTarefa].linhaDaTabela += "<td>" + insereFormularioMudarStatusDOING(idTarefasDoing) + "</td>";
+	tarefas[doingTarefa].linhaDaTabela += "<td>" + '<button id="deletarTarefaDoing' + idTarefasDoing.toString() +'" class="btnExcluirDOING">' +"Excluir </button>" + "</td>";
+	tarefas[doingTarefa].linhaDaTabela += "</tr>"; 
+
+	tarefasDoing.push(tarefas[doingTarefa]);
+
+	tarefas = updatedTarefas;
+
+	idTarefasDoing++;
+
+    atualizaTabelaTodo();
+	atualizaTabelaDoing();
+
 };

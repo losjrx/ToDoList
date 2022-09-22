@@ -35,6 +35,7 @@ button{
 
 button > img {
 	border-radius: 95px;
+	border: 10px solid #bb00dd;
 }
 
 
